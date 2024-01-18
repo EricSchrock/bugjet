@@ -1,6 +1,6 @@
 # Overview
 
-Simple budgeting scripts
+Scripts to merge transactions from multiple financial accounts.
 
 # Decision Log
 
@@ -47,3 +47,8 @@ Keeping manual editing of transaction metadata, like "category" and "comments", 
 so I chose the transaction database as the entry point for this metadata, instead of the spreadsheets exported from financial accounts,
 accepting that this requires the database to be persistent, rather fully regenerated at each import, to avoid losing the added metadata,
 and accepting that this requires extra logic to avoid multiple imports causing duplicate transactions in the database.
+
+## Decision 4: Transaction postprocessing
+
+Manually reviewing each transaction is a priority,
+so I chose to forgo the added complexity of adding a regex based config file to auto-categorize transactions.
