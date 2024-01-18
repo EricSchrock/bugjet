@@ -48,7 +48,7 @@ so I chose the transaction database as the entry point for this metadata, instea
 accepting that this requires the database to be persistent, rather fully regenerated at each import, to avoid losing the added metadata,
 and accepting that this requires extra logic to avoid multiple imports causing duplicate transactions in the database.
 
-## Decision 4: Transaction postprocessing
+## Decision 4: Transaction post-processing
 
 Manually reviewing each transaction is a priority,
 so I chose to forgo the added complexity of adding a regex based config file to auto-categorize transactions.
