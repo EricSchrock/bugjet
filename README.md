@@ -1,0 +1,2 @@
+# bugjet
+Simple budgeting scripts
