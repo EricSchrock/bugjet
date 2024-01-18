@@ -28,3 +28,22 @@ accepting downside <z>.
 ```
 
 [^2]: https://www.georgefairbanks.com/blog/comparch-wicsa-2011-panel-discussion-and-haiku-tutorial/
+
+## Decision 1: Transaction import format
+
+Supporting transaction data that includes commas is a priority,
+so I chose to export transactions from financial accounts in `xlsx` format instead of `csv`,
+accepting that `xlsx` is more complicated to work with than `csv`.
+
+## Decision 2: Transaction database format
+
+Simplicity and the ability to manually edit data are priorities,
+so I chose to use a spreadsheet to store imported transactions instead of something like an `SQL` database,
+accepting
+
+## Decision 3: Transaction metadata source
+
+Keeping manual editing of transaction metadata, like "category" and "comments", in just one place is a priority,
+so I chose the transaction database as the entry point for this metadata, instead of the spreadsheets exported from financial accounts,
+accepting that this requires the database to be persistent, rather fully regenerated at each import, to avoid losing the added metadata,
+and accepting that this requires extra logic to avoid multiple imports causing duplicate transactions in the database.
