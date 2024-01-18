@@ -23,7 +23,7 @@ accepting downside <consequence>.
 
 ```
 <x> is a priority,
-so we choose design <y>,
+so we chose design <y>,
 accepting downside <z>.
 ```
 
