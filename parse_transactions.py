@@ -1,24 +1,64 @@
+from hashlib import sha256
+from openpyxl import load_workbook
 from typing import List
 
+class Config:
+    def __init__(self, name: str, date_col: str, description_col: str, amount_col: str):
+        self.name = name
+        self.date_col = date_col
+        self.description_col = description_col
+        self.amount_col = amount_col
+
 class Transaction:
-    def __init__(self, date, id, source, description, amount):
+    def __init__(self, date, uid, source, description, amount):
         self.date = date
-        self.id = id,
+        self.uid = uid
         self.source = source
         self.description = description
         self.amount = amount
 
     def __str__(self):
-        return f"{self.date},{self.id},{self.source},{self.description},{self.amount},"
+        return f"{self.date},{self.uid},{self.source},{self.description},{self.amount},"
+
+def parse_imported_transactions(input_file: str, config: Config) -> List[Transaction]:
+    workbook = load_workbook(input_file)
+    sheet = workbook.active
+
+    index = {}
+    for i in range(1, sheet.max_column + 1):
+        index[sheet.cell(1, i).value] = i
+
+    transactions = []
+    for i in range(2, sheet.max_row + 1):
+        transaction_string = ""
+        for j in range(1, sheet.max_column + 1):
+            transaction_string += str(sheet.cell(i, j).value)
+
+        uid = sha256(transaction_string.encode()).hexdigest()
+
+        transaction = Transaction(sheet.cell(i, index[config.date_col]).value,
+                                  uid,
+                                  config.name,
+                                  sheet.cell(i, index[config.description_col]).value,
+                                  sheet.cell(i, index[config.amount_col]).value)
+
+        transactions.append(transaction)
+
+
+    return transactions
 
 if __name__ == "__main__":
-    # Read imported transactions
-    # Sanity check and filter imported transactions
+    input_file = "ExportedTransactions.xlsx"
+    config = Config("3Rivers FCU", "Posting Date", "Description", "Amount")
+
+    imported_transactions = parse_imported_transactions(input_file, config)
+    for transaction in imported_transactions:
+        print(str(transaction))
+
     # Add imported transactions to the transaction database (check transaction dates and hashes to avoid adding duplicates)
 
     # Implement arg parsing for input, config, and output
-    # Make transaction parsing configurable for different inputs
+    # Make transaction parsing configurable for different inputs (decision log entry for JSON vs YAML)
     # Add instructions and examples to the README
     # Add simple testing
-
-    pass
+    # Add open source license
