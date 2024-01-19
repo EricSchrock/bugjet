@@ -1,7 +1,8 @@
 from argparse import ArgumentParser
 from hashlib import sha256
 import json
-from openpyxl import load_workbook
+from openpyxl import load_workbook, Workbook
+from os import path
 from typing import Dict, List
 
 class Transaction:
@@ -14,6 +15,9 @@ class Transaction:
 
     def __str__(self):
         return f"{self.date},{self.uid},{self.source},{self.description},{self.amount},"
+
+    def to_list(self):
+        return [self.date, self.uid, self.source, self.description, self.amount]
 
 def parse_config(config_file: str) -> Dict:
     with open(config_file, 'r') as f:
@@ -44,8 +48,30 @@ def parse_imported_transactions(input_file: str, config: Dict) -> List[Transacti
 
         transactions.append(transaction)
 
-
     return transactions
+
+def update_transaction_database(output_file: str, imported_transactions: List[Transaction]):
+    workbook = None
+    sheet = None
+    if path.exists(output_file):
+        workbook = load_workbook(output_file)
+        sheet = workbook.active
+    else:
+        workbook = Workbook()
+        sheet = workbook.active
+        sheet.append(["Date", "UID", "Source", "Description", "Amount"])
+
+    for transaction in imported_transactions:
+        duplicate = False
+        for i in range(1, sheet.max_row + 1):
+            if transaction.uid == sheet.cell(i, 2).value:
+                duplicate = True
+                break
+
+        if not duplicate:
+            sheet.append(transaction.to_list())
+
+    workbook.save(output_file)
 
 if __name__ == "__main__":
     parser = ArgumentParser(description='Parse transactions from different financial accounts into a common format.')
@@ -56,12 +82,9 @@ if __name__ == "__main__":
 
     config = parse_config(args.config)
     imported_transactions = parse_imported_transactions(args.input, config)
-    for transaction in imported_transactions:
-        print(str(transaction))
-
-    # Add imported transactions to the transaction database (check transaction dates and hashes to avoid adding duplicates)
+    update_transaction_database(args.output, imported_transactions)
 
     # Make transaction parsing configurable for different inputs (decision log entry for JSON vs YAML)
     # Add instructions and examples to the README
-    # Add simple testing
+    # Add simple testing (new vs append, different accounts, duplicate transactions)
     # Add open source license
