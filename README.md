@@ -1,6 +1,26 @@
 # Overview
 
-Scripts to merge transactions from multiple financial accounts.
+Script to merge transactions from multiple financial accounts.
+
+# Instructions
+
+## Installation
+
+```sh
+pip install virtualenv
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+deactivate
+```
+
+## Usage
+
+```sh
+source venv/bin/activate
+python parse_transactions.py -i <input.xlsx> -c <config.json> -o <output.xlsx>
+deactivate
+```
 
 # Decision Log
 
