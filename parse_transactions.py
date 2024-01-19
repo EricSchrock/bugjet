@@ -1,14 +1,8 @@
 from argparse import ArgumentParser
 from hashlib import sha256
+import json
 from openpyxl import load_workbook
-from typing import List
-
-class Config:
-    def __init__(self, name: str, date_col: str, description_col: str, amount_col: str):
-        self.name = name
-        self.date_col = date_col
-        self.description_col = description_col
-        self.amount_col = amount_col
+from typing import Dict, List
 
 class Transaction:
     def __init__(self, date, uid, source, description, amount):
@@ -21,7 +15,12 @@ class Transaction:
     def __str__(self):
         return f"{self.date},{self.uid},{self.source},{self.description},{self.amount},"
 
-def parse_imported_transactions(input_file: str, config: Config) -> List[Transaction]:
+def parse_config(config_file: str) -> Dict:
+    with open(config_file, 'r') as f:
+        data = json.load(f)
+    return data
+
+def parse_imported_transactions(input_file: str, config: Dict) -> List[Transaction]:
     workbook = load_workbook(input_file)
     sheet = workbook.active
 
@@ -37,11 +36,11 @@ def parse_imported_transactions(input_file: str, config: Config) -> List[Transac
 
         uid = sha256(transaction_string.encode()).hexdigest()
 
-        transaction = Transaction(sheet.cell(i, index[config.date_col]).value,
+        transaction = Transaction(sheet.cell(i, index[config["date_column"]]).value,
                                   uid,
-                                  config.name,
-                                  sheet.cell(i, index[config.description_col]).value,
-                                  sheet.cell(i, index[config.amount_col]).value)
+                                  config["name"],
+                                  sheet.cell(i, index[config["description_column"]]).value,
+                                  sheet.cell(i, index[config["amount_column"]]).value)
 
         transactions.append(transaction)
 
@@ -55,8 +54,7 @@ if __name__ == "__main__":
     parser.add_argument('output', help='Path to output file (xlsx). Creates file or appends imported transactions to existing file (ignores duplicate transactions).')
     args = parser.parse_args()
 
-    config = Config("3Rivers FCU", "Posting Date", "Description", "Amount")
-
+    config = parse_config(args.config)
     imported_transactions = parse_imported_transactions(args.input, config)
     for transaction in imported_transactions:
         print(str(transaction))
