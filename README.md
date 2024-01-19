@@ -38,8 +38,7 @@ accepting that `xlsx` is more complicated to work with than `csv`.
 ## Decision 2: Transaction database format
 
 Simplicity and the ability to manually edit data are priorities,
-so I chose to use a spreadsheet to store imported transactions instead of something like an `SQL` database,
-accepting
+so I chose to use a spreadsheet to store imported transactions instead of something like an `SQL` database.
 
 ## Decision 3: Transaction metadata source
 
