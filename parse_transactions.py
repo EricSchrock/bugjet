@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 from hashlib import sha256
 from openpyxl import load_workbook
 from typing import List
@@ -48,16 +49,20 @@ def parse_imported_transactions(input_file: str, config: Config) -> List[Transac
     return transactions
 
 if __name__ == "__main__":
-    input_file = "ExportedTransactions.xlsx"
+    parser = ArgumentParser(description='Parse transactions from different financial accounts into a common format.')
+    parser.add_argument('input', help='Path to input file (xlsx). Export from your financial account.')
+    parser.add_argument('config', help='Path to config file (JSON). Describes input file format.')
+    parser.add_argument('output', help='Path to output file (xlsx). Creates file or appends imported transactions to existing file (ignores duplicate transactions).')
+    args = parser.parse_args()
+
     config = Config("3Rivers FCU", "Posting Date", "Description", "Amount")
 
-    imported_transactions = parse_imported_transactions(input_file, config)
+    imported_transactions = parse_imported_transactions(args.input, config)
     for transaction in imported_transactions:
         print(str(transaction))
 
     # Add imported transactions to the transaction database (check transaction dates and hashes to avoid adding duplicates)
 
-    # Implement arg parsing for input, config, and output
     # Make transaction parsing configurable for different inputs (decision log entry for JSON vs YAML)
     # Add instructions and examples to the README
     # Add simple testing
