@@ -86,5 +86,4 @@ if __name__ == "__main__":
 
     # Make transaction parsing configurable for different inputs (decision log entry for JSON vs YAML)
     # Add instructions and examples to the README
-    # Add simple testing (new vs append, different accounts, duplicate transactions)
     # Add open source license
