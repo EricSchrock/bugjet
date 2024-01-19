@@ -16,11 +16,17 @@ deactivate
 
 ## Usage
 
+First, export your transaction data from your financial accounts to `xlsx` files. Second, create a config file for each financial account that describes how to extract the date, description, and amount of each transaction from the exported data. The `examples` directory has several examples of exported data and the associated config files. Third, run the script once for each set of exported data.
+
 ```sh
 source venv/bin/activate
-python parse_transactions.py -i <input.xlsx> -c <config.json> -o <output.xlsx>
+python parse_transactions.py input1.xlsx config1.json output.xlsx
+python parse_transactions.py input2.xlsx config2.json output.xlsx
+python parse_transactions.py input3.xlsx config3.json output.xlsx
 deactivate
 ```
+
+Notice that all calls to `parse_transactions.py` use the same output file. If the file does not exist, the script will create it. If it does exist, the script will append the transactions from the input file to the existing output file, skipping duplicate transactions.
 
 # Decision Log
 

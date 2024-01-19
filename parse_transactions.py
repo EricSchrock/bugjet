@@ -85,5 +85,4 @@ if __name__ == "__main__":
     update_transaction_database(args.output, imported_transactions)
 
     # Make transaction parsing configurable for different inputs (decision log entry for JSON vs YAML)
-    # Add instructions and examples to the README
     # Add open source license
