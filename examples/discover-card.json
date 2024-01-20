@@ -1,0 +1,7 @@
+{
+    "name": "Discover Card",
+    "negate-amount": false,
+    "date_column": "Trans. Date",
+    "description_column": "Description",
+    "amount_column": "Amount"
+}

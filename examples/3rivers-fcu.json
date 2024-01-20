@@ -1,5 +1,6 @@
 {
     "name": "3Rivers FCU",
+    "negate-amount": true,
     "date_column": "Posting Date",
     "description_column": "Description",
     "amount_column": "Amount"

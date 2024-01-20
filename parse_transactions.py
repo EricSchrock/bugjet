@@ -40,11 +40,15 @@ def parse_imported_transactions(input_file: str, config: Dict) -> List[Transacti
 
         uid = sha256(transaction_string.encode()).hexdigest()
 
+        amount = sheet.cell(i, index[config["amount_column"]]).value
+        if config["negate-amount"]:
+            amount *= -1
+
         transaction = Transaction(sheet.cell(i, index[config["date_column"]]).value,
                                   uid,
                                   config["name"],
                                   sheet.cell(i, index[config["description_column"]]).value,
-                                  sheet.cell(i, index[config["amount_column"]]).value)
+                                  amount)
 
         transactions.append(transaction)
 
