@@ -99,6 +99,3 @@ if __name__ == "__main__":
     config = parse_config(args.config)
     transactions = parse_imported_transactions(args.input, config)
     update_transaction_database(args.output, transactions)
-
-    # Make transaction parsing configurable for different inputs (decision log entry for JSON vs YAML)
-    # Add open source license

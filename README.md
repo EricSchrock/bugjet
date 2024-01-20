@@ -77,3 +77,9 @@ and accepting that this requires extra logic to avoid multiple imports causing d
 
 Manually reviewing each transaction is a priority,
 so I chose to forgo the added complexity of adding a regex based config file to auto-categorize transactions.
+
+## Decision 5: Config file format
+
+Minimizing 3rd-party dependencies is a priority,
+so I chose to use JSON instead of YAML for the config file,
+accepting that JSON is slightly less human readable.
