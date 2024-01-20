@@ -6,6 +6,7 @@ test:
 	python parse_transactions.py examples/3rivers-fcu.xlsx            examples/3rivers-fcu.json   test.xlsx
 	python parse_transactions.py examples/3rivers-fcu-duplicates.xlsx examples/3rivers-fcu.json   test.xlsx
 	python parse_transactions.py examples/discover-card.xlsx          examples/discover-card.json test.xlsx
+	python parse_transactions.py examples/discover-bank.xlsx          examples/discover-bank.json test.xlsx
 
 clean:
 	rm test.xlsx

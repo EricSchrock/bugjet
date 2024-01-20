@@ -40,9 +40,21 @@ def parse_imported_transactions(input_file: str, config: Dict) -> List[Transacti
 
         uid = sha256(transaction_string.encode()).hexdigest()
 
-        amount = sheet.cell(i, index[config["amount_column"]]).value
-        if config["negate-amount"]:
-            amount *= -1
+        amount = None
+        if config["single_amount_column"]:
+            amount = sheet.cell(i, index[config["amount_column"]]).value
+            if config["negate_amount"]:
+                amount *= -1
+        else:
+            debits = sheet.cell(i, index[config["debits_column"]]).value
+            if config["negate_debits"]:
+                debits *= -1
+
+            credits = sheet.cell(i, index[config["credits_column"]]).value
+            if config["negate_credits"]:
+                credits *= -1
+
+            amount = debits + credits
 
         transaction = Transaction(sheet.cell(i, index[config["date_column"]]).value,
                                   uid,
@@ -54,7 +66,7 @@ def parse_imported_transactions(input_file: str, config: Dict) -> List[Transacti
 
     return transactions
 
-def update_transaction_database(output_file: str, imported_transactions: List[Transaction]):
+def update_transaction_database(output_file: str, transactions: List[Transaction]):
     workbook = None
     sheet = None
     if path.exists(output_file):
@@ -65,7 +77,7 @@ def update_transaction_database(output_file: str, imported_transactions: List[Tr
         sheet = workbook.active
         sheet.append(["Date", "UID", "Source", "Description", "Amount"])
 
-    for transaction in imported_transactions:
+    for transaction in transactions:
         duplicate = False
         for i in range(1, sheet.max_row + 1):
             if transaction.uid == sheet.cell(i, 2).value:
@@ -85,8 +97,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     config = parse_config(args.config)
-    imported_transactions = parse_imported_transactions(args.input, config)
-    update_transaction_database(args.output, imported_transactions)
+    transactions = parse_imported_transactions(args.input, config)
+    update_transaction_database(args.output, transactions)
 
     # Make transaction parsing configurable for different inputs (decision log entry for JSON vs YAML)
     # Add open source license
