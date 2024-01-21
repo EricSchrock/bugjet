@@ -16,7 +16,11 @@ deactivate
 
 ## Usage
 
-First, export your transaction data from your financial accounts to `xlsx` files. Second, create a config file for each financial account that describes how to extract the date, description, and amount of each transaction from the exported data. The `examples` directory has several examples of exported data and the associated config files. Third, run the script once for each set of exported data.
+First, export your transaction data from your financial accounts to `xlsx` files. The first row should be a header describing each column of data. You may need to download the data in `csv` format, open the `csv` file in excel, and "save as" into the `xlsx` format.
+
+Second, create a config file for each financial account that describes how to extract the date, description, and amount of each transaction from the exported data. The `examples` directory has several examples of exported data and the associated config files.
+
+Third, run the script once for each set of exported data.
 
 ```sh
 source venv/bin/activate
