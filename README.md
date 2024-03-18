@@ -1,3 +1,5 @@
+<img src="https://github.com/EricSchrock/bugjet/images/logo.jpg" width="50" />
+
 # Overview
 
 Script to merge transactions from multiple financial accounts.
