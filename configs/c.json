@@ -1,8 +1,8 @@
 {
-    "name": "3Rivers FCU",
-    "date_column": "Posting Date",
+    "name": "C",
+    "date_column": "Trans. Date",
     "description_column": "Description",
     "single_amount_column": true,
     "amount_column": "Amount",
-    "negate_amount": true
+    "negate_amount": false
 }

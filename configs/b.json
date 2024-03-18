@@ -1,5 +1,5 @@
 {
-    "name": "Discover Bank",
+    "name": "B",
     "date_column": "Transaction Date",
     "description_column": "Transaction Description",
     "single_amount_column": false,

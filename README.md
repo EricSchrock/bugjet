@@ -42,10 +42,10 @@ Below is an example of four inputs and the corresponding merged output. Notice t
 
 #### Inputs
 
-![3Rivers FCU](/images/3rivers-fcu.png)
-![3Rivers FCU (duplicates)](/images/3rivers-fcu-duplicates.png)
-![Discover Bank](/images/discover-bank.png)
-![Discover Card](/images/discover-card.png)
+![A](/images/a.png)
+![A (duplicates)](/images/a-duplicates.png)
+![B](/images/b.png)
+![C](/images/c.png)
 
 #### Output
 

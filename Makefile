@@ -1,12 +1,10 @@
-.PHONY: all test clean
+.PHONY: all test
 
 all: test
 
 test:
-	python parse_transactions.py examples/3rivers-fcu.xlsx            examples/3rivers-fcu.json   test.xlsx
-	python parse_transactions.py examples/3rivers-fcu-duplicates.xlsx examples/3rivers-fcu.json   test.xlsx
-	python parse_transactions.py examples/discover-card.xlsx          examples/discover-card.json test.xlsx
-	python parse_transactions.py examples/discover-bank.xlsx          examples/discover-bank.json test.xlsx
-
-clean:
-	rm test.xlsx
+	rm examples/merged-transactions.xlsx
+	python parse_transactions.py examples/a.xlsx            configs/a.json examples/merged-transactions.xlsx
+	python parse_transactions.py examples/a-duplicates.xlsx configs/a.json examples/merged-transactions.xlsx
+	python parse_transactions.py examples/b.xlsx            configs/b.json examples/merged-transactions.xlsx
+	python parse_transactions.py examples/c.xlsx            configs/c.json examples/merged-transactions.xlsx
