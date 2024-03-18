@@ -16,11 +16,11 @@ deactivate
 
 ### Export transaction data
 
-Export your transaction data from your financial accounts to `xlsx` files. The first row should be a header describing each column of data. You may need to download the data in `csv` format, open the `csv` file in excel, and "save as" into the `xlsx` format. See the `examples` directory for examples.
+Export your transaction data from your financial accounts to `xlsx` files. The first row should be a header describing each column of data. You may need to download the data in `csv` format, open the `csv` file in excel, and "save as" into the `xlsx` format.
 
 ### Create config files
 
-Create a `json` config file for each financial account that describes how to extract the date, description, and amount of each transaction from the exported data. See the `configs` directory for examples.
+Create a `json` config file for each financial account that describes how to extract the date, description, and amount of each transaction from the exported data. See the `examples` and `configs` directories for examples of config files for different transaction data formats.
 
 ### Run Bugjet
 
@@ -35,6 +35,21 @@ deactivate
 ```
 
 Notice that all calls to `parse_transactions.py` use the same output file. If the file does not exist, the script will create it. If it does exist, the script will append the transactions from the input file to the existing output file, **skipping duplicate transactions**.
+
+### Example
+
+Below is an example of four inputs and the corresponding merged output. Notice that the first two inputs have duplicate transactions, which are not duplicated in the output. Notice also that Bugjet can handle debits and credits being in the same column or in different columns and can handle different meanings for positive and negative amounts.
+
+#### Inputs
+
+![3Rivers FCU](/images/3rivers-fcu.png)
+![3Rivers FCU (duplicates)](/images/3rivers-fcu-duplicates.png)
+![Discover Bank](/images/discover-bank.png)
+![Discover Card](/images/discover-card.png)
+
+#### Output
+
+![Merged Transactions](/images/merged-transactions.png)
 
 ## Contributing
 
