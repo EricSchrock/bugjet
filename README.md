@@ -1,4 +1,4 @@
-<img src="https://github.com/EricSchrock/bugjet/blob/main/images/logo.jpg" width="50" />
+<img src="https://github.com/EricSchrock/bugjet/blob/main/images/logo.jpg" width="100" />
 
 # Overview
 
