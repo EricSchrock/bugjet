@@ -1,4 +1,4 @@
-<img src="https://github.com/EricSchrock/bugjet/blob/main/images/logo.jpg" width="100" />
+<img src="https://github.com/EricSchrock/bugjet/blob/master/images/logo.jpg" width="100" />
 
 Bugjet is a tool for merging transactions from multiple financial accounts into a common format. I created it to automate a portion of my budgeting process.
 
