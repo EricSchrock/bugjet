@@ -1,0 +1,10 @@
+{
+    "name": "B",
+    "date_column": "Transaction Date",
+    "description_column": "Transaction Description",
+    "single_amount_column": false,
+    "debits_column": "Debit",
+    "negate_debits": false,
+    "credits_column": "Credit",
+    "negate_credits": true
+}

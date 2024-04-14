@@ -1,0 +1,8 @@
+{
+    "name": "A",
+    "date_column": "Posting Date",
+    "description_column": "Description",
+    "single_amount_column": true,
+    "amount_column": "Amount",
+    "negate_amount": true
+}
