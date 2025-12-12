@@ -28,9 +28,9 @@ Run Bugjet once for each set of exported data.
 
 ```sh
 source venv/bin/activate
-python parse_transactions.py input1.xlsx config1.json output.xlsx
-python parse_transactions.py input2.xlsx config2.json output.xlsx
-python parse_transactions.py input3.xlsx config3.json output.xlsx
+python parse_transactions.py input1.xlsx -c config1.json -o output.xlsx
+python parse_transactions.py input2.xlsx -c config2.json -o output.xlsx
+python parse_transactions.py input3.xlsx -c config3.json -o output.xlsx
 deactivate
 ```
 

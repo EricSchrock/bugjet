@@ -92,9 +92,12 @@ def update_transaction_database(output_file: str, transactions: List[Transaction
 if __name__ == "__main__":
     parser = ArgumentParser(description='Parse transactions from different financial accounts into a common format.')
     parser.add_argument('input', help='Path to input file (xlsx). Export from your financial account.')
-    parser.add_argument('config', help='Path to config file (JSON). Describes input file format.')
-    parser.add_argument('output', help='Path to output file (xlsx). Creates file or appends imported transactions to existing file (ignores duplicate transactions).')
+    parser.add_argument('--config', '-c', help='Path to config file (JSON). Describes input file format.')
+    parser.add_argument('--output', '-o', default='transactions.xlsx', help='Path to output file (xlsx). Creates file or appends imported transactions to existing file (ignores duplicate transactions).')
     args = parser.parse_args()
+
+    if not args.config:
+        args.config = f"configs/{args.input.split('.')[0]}.json"
 
     config = parse_config(args.config)
     transactions = parse_imported_transactions(args.input, config)
