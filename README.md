@@ -28,13 +28,13 @@ Run Bugjet once for each set of exported data.
 
 ```sh
 source venv/bin/activate
-python parse_transactions.py input1.xlsx -c config1.json -o output.xlsx
-python parse_transactions.py input2.xlsx -c config2.json -o output.xlsx
-python parse_transactions.py input3.xlsx -c config3.json -o output.xlsx
+python bugjet.py input1.xlsx -c config1.json -o output.xlsx
+python bugjet.py input2.xlsx -c config2.json -o output.xlsx
+python bugjet.py input3.xlsx -c config3.json -o output.xlsx
 deactivate
 ```
 
-Notice that all calls to `parse_transactions.py` use the same output file. If the file does not exist, the script will create it. If it does exist, the script will append the transactions from the input file to the existing output file, **skipping duplicate transactions**.
+Notice that all calls to `bugjet.py` use the same output file. If the file does not exist, the script will create it. If it does exist, the script will append the transactions from the input file to the existing output file, **skipping duplicate transactions**.
 
 ### Example
 
