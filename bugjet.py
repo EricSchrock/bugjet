@@ -77,15 +77,15 @@ def update_transaction_database(output_file: str, transactions: List[Transaction
         sheet = workbook.active
         sheet.append(["Date", "UID", "Source", "Description", "Amount"])
 
-    for transaction in transactions:
-        duplicate = False
-        for i in range(1, sheet.max_row + 1):
-            if transaction.uid == sheet.cell(i, 2).value:
-                duplicate = True
-                break
+    existing_uids = set([ sheet.cell(row, column=2).value for row in range(2, sheet.max_row + 1) ])
+    new_uids = set([ t.uid for t in transactions ]) - existing_uids
 
-        if not duplicate:
+    for transaction in transactions:
+        if transaction.uid in new_uids:
             sheet.append(transaction.to_list())
+
+    for row in range(2, sheet.max_row + 1):
+        sheet.cell(row, column=1).number_format = 'm/d/yyyy'
 
     workbook.save(output_file)
 
