@@ -44,15 +44,19 @@ def parse_imported_transactions(input_file: str, config: Dict) -> List[Transacti
         if config["single_amount_column"]:
             amount = sheet.cell(i, index[config["amount_column"]]).value
             if config["negate_amount"]:
-                amount *= -1
+                amount *= -1.0
         else:
             debits = sheet.cell(i, index[config["debits_column"]]).value
-            if config["negate_debits"]:
-                debits *= -1
+            if not debits:
+                debits = 0.0
+            elif config["negate_debits"]:
+                debits *= -1.0
 
             credits = sheet.cell(i, index[config["credits_column"]]).value
-            if config["negate_credits"]:
-                credits *= -1
+            if not credits:
+                credits = 0.0
+            elif config["negate_credits"]:
+                credits *= -1.0
 
             amount = debits + credits
 
